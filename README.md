@@ -4,7 +4,7 @@
 
 ```
 
-git clone --resource-submodules https://github.com/SwagMessiah02/vagrant-app
+git clone --recurse-submodules https://github.com/SwagMessiah02/vagrant-app
 
 ```
 
