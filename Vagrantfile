@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.define :db do |db_config|
-    db_config.vm.box = "bento/ubuntu-24.04"
+    db_config.vm.box = "bento/ubuntu-25.04"
     db_config.vm.hostname = "postgresql-server"
     db_config.vm.network :private_network, ip: "192.168.56.11"
 
