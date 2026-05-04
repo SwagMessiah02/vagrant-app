@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
     web_config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
     web_config.vm.provider "virtualbox" do |vb|
-      vb.name   = "tomcat-server2"
+      vb.name   = "tomcat-server"
       vb.memory = "4096"
       vb.cpus   = 2
     end
