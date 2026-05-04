@@ -1,0 +1,3 @@
+[submodule "app/user-auth-api"]
+	path = app/user-auth-api
+	url = https://github.com/SwagMessiah02/user-auth-api
