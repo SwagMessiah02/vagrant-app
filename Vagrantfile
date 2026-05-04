@@ -32,6 +32,7 @@ EOF
       sudo -u postgres psql -f /vagrant/sources/init.sql
     SHELL
   end
+end
 
 Vagrant.configure("2") do |config| 
   config.vm.define :web do |web_config|
