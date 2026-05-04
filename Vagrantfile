@@ -32,9 +32,10 @@ EOF
       sudo -u postgres psql -f /vagrant/sources/init.sql
     SHELL
   end
+end
 
 Vagrant.configure("2") do |config| 
-  config.vm.define :web2 do |web_config|
+  config.vm.define :web do |web_config|
     web_config.vm.box = "bento/ubuntu-25.04"
     web_config.vm.hostname = "tomcat-server"
     web_config.vm.network :private_network, ip: "192.168.56.10"
@@ -54,7 +55,7 @@ Vagrant.configure("2") do |config|
       apt-get upgrade -y
 
       apt-get install -y openjdk-25-jdk
-      apt-get install maven
+      apt-get install maven -y
 
       echo 'JAVA_HOME="/usr/lib/jvm/java-25-openjdk-amd64"'       >> /etc/environment
       echo 'export JAVA_HOME="/usr/lib/jvm/java-25-openjdk-amd64"' >> /etc/profile.d/java.sh
@@ -95,7 +96,7 @@ EOF
 </Context>
 EOF
 
-    sudo cat >  /etc/tomcat11/webapps/host-manager/META-INF/context.xml <<EOF
+    sudo cat > /etc/tomcat11/webapps/host-manager/META-INF/context.xml <<EOF
 <Context antiResourceLocking="false" privileged="true" ignoreAnnotations="true">
   <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
                    sameSiteCookies="strict" />
@@ -103,7 +104,6 @@ EOF
 </Context>
 EOF
 
-    sudo touch /etc/systemd/system/tomcat.service
     sudo cat > /etc/systemd/system/tomcat.service <<EOF
 [Unit]
 Description=Apache Tomcat 11 Web Application Server
@@ -120,28 +120,7 @@ Environment="CATALINA_PID=/etc/tomcat11/temp/tomcat.pid"
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 ExecStart=/etc/tomcat11/bin/startup.sh
 ExecStop=/etc/tomcat11/bin/shutdown.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-    cat > /etc/systemd/system <<EOF
-[Unit]
-Description=Apache Tomcat 11 Web Application Server
-After=network.target
-
-[Service]
-Type=forking
-User=tomcat
-Group=tomcat
-Environment="JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64"
-Environment="CATALINA_HOME=/etc/tomcat11"
-Environment="CATALINA_BASE=/etc/tomcat11"
-Environment="CATALINA_PID=/etc/tomcat11/temp/tomcat.pid"
-Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
-ExecStart=/etc/tomcat11/bin/startup.sh
-ExecStop=/etc/tomcat11/bin/shutdown.sh
-Environment="DB_URL=192.168.56.11"
+Environment="DB_HOST=192.168.56.11"
 Environment="DB_USER=postgres"
 Environment="DB_PASSWORD=12345"
 
