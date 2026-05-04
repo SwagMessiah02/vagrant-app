@@ -34,7 +34,7 @@ EOF
   end
 
 Vagrant.configure("2") do |config| 
-  config.vm.define :web2 do |web_config|
+  config.vm.define :web do |web_config|
     web_config.vm.box = "bento/ubuntu-25.04"
     web_config.vm.hostname = "tomcat-server"
     web_config.vm.network :private_network, ip: "192.168.56.10"
@@ -141,7 +141,7 @@ Environment="CATALINA_PID=/etc/tomcat11/temp/tomcat.pid"
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 ExecStart=/etc/tomcat11/bin/startup.sh
 ExecStop=/etc/tomcat11/bin/shutdown.sh
-Environment="DB_URL=192.168.56.11"
+Environment="DB_HOST=192.168.56.11"
 Environment="DB_USER=postgres"
 Environment="DB_PASSWORD=12345"
 
