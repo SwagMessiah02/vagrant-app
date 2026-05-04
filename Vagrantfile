@@ -125,6 +125,30 @@ ExecStop=/etc/tomcat11/bin/shutdown.sh
 WantedBy=multi-user.target
 EOF
 
+    cat > /etc/systemd/system <<EOF
+[Unit]
+Description=Apache Tomcat 11 Web Application Server
+After=network.target
+
+[Service]
+Type=forking
+User=tomcat
+Group=tomcat
+Environment="JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64"
+Environment="CATALINA_HOME=/etc/tomcat11"
+Environment="CATALINA_BASE=/etc/tomcat11"
+Environment="CATALINA_PID=/etc/tomcat11/temp/tomcat.pid"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+ExecStart=/etc/tomcat11/bin/startup.sh
+ExecStop=/etc/tomcat11/bin/shutdown.sh
+Environment="DB_URL=192.168.56.11"
+Environment="DB_USER=postgres"
+Environment="DB_PASSWORD=12345"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
     sudo systemctl daemon-reload
     sudo systemctl enable tomcat
     sudo systemctl start tomcat
