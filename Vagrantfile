@@ -126,7 +126,7 @@ ExecStop=/etc/tomcat11/bin/shutdown.sh
 WantedBy=multi-user.target
 EOF
 
-    cat > /etc/systemd/system/tomcat.service <<EOF
+    cat > /etc/systemd/system <<EOF
 [Unit]
 Description=Apache Tomcat 11 Web Application Server
 After=network.target
