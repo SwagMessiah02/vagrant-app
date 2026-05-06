@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
     db_config.vm.provider "virtualbox" do |vb|
       vb.name   = "postgresql-server"
-      vb.memory = "1024" # 1.5 GB
+      vb.memory = "1024" # 1 GB
       vb.cpus   = 1
     end
 
@@ -45,7 +45,7 @@ EOF
 
     web_config.vm.provider "virtualbox" do |vb|
       vb.name   = "tomcat-server"
-      vb.memory = "1664" # 1.5 GB
+      vb.memory = "1664" # 1.6 GB
       vb.cpus   = 1
     end
 
