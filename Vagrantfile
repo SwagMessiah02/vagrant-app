@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
     db_config.vm.provider "virtualbox" do |vb|
       vb.name   = "postgresql-server"
-      vb.memory = "1536" # 1.5 GB
+      vb.memory = "1024" # 1.5 GB
       vb.cpus   = 1
     end
 
@@ -45,7 +45,7 @@ EOF
 
     web_config.vm.provider "virtualbox" do |vb|
       vb.name   = "tomcat-server"
-      vb.memory = "1536" # 1.5 GB
+      vb.memory = "1664" # 1.5 GB
       vb.cpus   = 1
     end
 
@@ -100,7 +100,7 @@ EOF
         roles="manager-gui,manager-script,admin-gui"/>
 </tomcat-users>
 EOF
-    
+
       cat > /etc/tomcat11/webapps/manager/META-INF/context.xml <<EOF
 <Context antiResourceLocking="false" privileged="true" ignoreAnnotations="true">
   <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
