@@ -1,4 +1,4 @@
-# Virtualzação de servidor Tomcat e PostgreSQL com Vagrant
+# Virtualização de servidor Tomcat e PostgreSQL com Vagrant
 
 ## Como clonar esse repositório:
 
