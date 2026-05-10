@@ -103,10 +103,10 @@ EOF
       sudo wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.22/bin/apache-tomcat-11.0.22.tar.gz
       sudo mkdir /etc/tomcat11
       sudo tar -xzf tomcat.tar.gz -C /etc/tomcat11 --strip-components=1
+      sudo rm tomcat.tar.gz
       sudo useradd -r -m -U -d /etc/tomcat11 -s /bin/false tomcat
       sudo chown -R tomcat: /etc/tomcat11
       sudo sh -c 'chmod +x /etc/tomcat11/bin/*.sh'
-
 
       # Define as credenciais de acesso ao servidor
       cat > /etc/tomcat11/conf/tomcat-users.xml <<EOF
@@ -159,11 +159,11 @@ Environment="CATALINA_HOME=/etc/tomcat11"
 Environment="CATALINA_BASE=/etc/tomcat11"
 Environment="CATALINA_PID=/etc/tomcat11/temp/tomcat.pid"
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
-ExecStart=/etc/tomcat11/bin/startup.sh
-ExecStop=/etc/tomcat11/bin/shutdown.sh
 Environment="DB_HOST=192.168.56.11"                                                  
 Environment="DB_USER=postgres"
 Environment="DB_PASSWORD=12345"
+ExecStart=/etc/tomcat11/bin/startup.sh
+ExecStop=/etc/tomcat11/bin/shutdown.sh
 
 [Install]
 WantedBy=multi-user.target
