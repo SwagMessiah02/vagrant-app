@@ -19,7 +19,7 @@ vagrant up
 http://localhost:8080/user-auth-0.0.1-SNAPSHOT/user/login
 ```
 
-# URL HTTPS (Somente se for habilitado):
+## URL HTTPS (Somente se for habilitado):
 
 ```
 https://localhost:8443/user-auth-0.0.1-SNAPSHOT/user/login
